@@ -1,4 +1,4 @@
-import { DefaultTheme } from "styled-components";
+import { DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
 	colors: {
@@ -8,4 +8,12 @@ export const theme: DefaultTheme = {
 		white: '#FAFAFA',
 		primary: '#1FC9E1',
 	},
-}
+	sizes: {
+		xsmall: '1rem',
+		small: '1.2rem',
+		medium: '1.6rem',
+		large: '2.4rem',
+		xlarge: '3.2rem',
+		xxlarge: '4.0rem',
+	},
+};
