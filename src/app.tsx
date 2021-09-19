@@ -1,13 +1,12 @@
-import styled from 'styled-components'
+import { Container } from 'app-styles'
+import { Content } from 'content'
+import { Sidebar } from 'sidebar'
 
 export function App() {
 	return (
-		<div>
-			<Title>App</Title>
-		</div>
+		<Container>
+			<Sidebar />
+			<Content />
+    </Container>
 	)
 }
-
-const Title = styled.h1`
-	color: ${(props) => props.theme.colors.primary}
-`
