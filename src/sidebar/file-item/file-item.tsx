@@ -14,7 +14,7 @@ export function FileItem({ name, active, status }: FileProps) {
 				<FileIcon />
 				{name}
 			</S.Link>
-			{active && S.statusIcons[status]}
+			{active && <S.StatusIcon status={status} /> }
 			<S.CloseButton>
 				<CloseIcon />
 			</S.CloseButton>
