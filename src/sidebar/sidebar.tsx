@@ -3,16 +3,9 @@ import { Logo } from "ui/logo";
 import { Button } from 'ui/button';
 import { PlusIcon } from 'ui/icons';
 import { Explorer } from './explorer';
+import { File } from 'resources/types/files'
 
-type file = {
-  id: string
-  name: string
-  content: string
-  active: boolean
-  status: 'editing' | 'saving' | 'saved',
-}
-
-const files: file[] = [
+const files: File[] = [
   {
     id: '1',
     name: 'Readme.md',
