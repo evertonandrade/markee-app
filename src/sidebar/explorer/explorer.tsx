@@ -1,16 +1,9 @@
 import * as S from './explorer-styles'
-import { File } from "sidebar/file"
-
-type file = {
-  id: string
-  name: string
-  content: string
-  active: boolean
-  status: 'editing' | 'saving' | 'saved',
-}
+import { FileItem } from "sidebar/file-item"
+import { File } from 'resources/types/files'
 
 type ExplorerProps = {
-  files: file[]
+  files: File[]
 }
 
 export function Explorer ({ files }: ExplorerProps) {
@@ -18,7 +11,7 @@ export function Explorer ({ files }: ExplorerProps) {
     <S.ContainerExplorer>
       <S.List>
         {files.map(({ id, name, active, status }) => (
-          <File 
+          <FileItem 
             key={id} 
             name={name}
             active={active} 

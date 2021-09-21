@@ -1,5 +1,5 @@
 import { FileIcon, CloseIcon } from 'ui/icons'
-import * as S from './file-styles'
+import * as S from './file-item-styles'
 
 type FileProps = {
 	name: string
@@ -7,14 +7,14 @@ type FileProps = {
 	status: 'editing' | 'saving' | 'saved'
 }
 
-export function File({ name, active, status }: FileProps) {
+export function FileItem({ name, active, status }: FileProps) {
 	return (
 		<S.ListItem active={active}>
 			<S.Link>
 				<FileIcon />
 				{name}
 			</S.Link>
-			{active && S.statusIcons[status]}
+			{active && <S.StatusIcon status={status} /> }
 			<S.CloseButton>
 				<CloseIcon />
 			</S.CloseButton>
