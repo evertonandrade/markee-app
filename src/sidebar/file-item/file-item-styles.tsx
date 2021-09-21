@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components";
+import { Status } from "resources/types/files";
+import styled, { css, keyframes } from "styled-components";
 import { FileIcon, EditingIcon, SavedIcon, SavingIcon } from 'ui/icons'
 
 type ListItemProps = {
@@ -51,11 +52,37 @@ export const CloseButton = styled.button`
   display: none;
 `
 
-export const statusIcons = {
-	editing: <EditingIcon />,
-	saving: <SavingIcon />,
-	saved: <SavedIcon />,
+const rotation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+`
+
+const Loading = styled(SavingIcon)`
+  animation: ${rotation} 1s infinite linear;
+`; 
+
+const Edit = styled(EditingIcon)``;
+
+const Save = styled(SavedIcon)``; 
+
+type StatusIconProps = {
+  status: Status
+  className?: string
 }
 
 
+export const StatusIcon = ({ status = 'saved', className }: StatusIconProps) => {
+	const StatusComp = {
+		editing: Edit,
+		saving: Loading,
+		saved: Save,
+	}[status];
+
+  return <StatusComp className={className} />
+};
 
