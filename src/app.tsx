@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent } from 'react'
+import { useState, useRef, ChangeEvent, MouseEvent } from 'react'
 import { Container } from 'app-styles'
 import { Content } from 'content'
 import { Sidebar } from 'sidebar'
@@ -22,6 +22,14 @@ export function App() {
 			newFile,
 		])
 		inputRef.current?.focus()
+	}
+
+  const handleSelectFile = (id: string) => (event: MouseEvent) => {
+		event.preventDefault();
+		setFiles((files) =>
+			files.map((file) => ({ ...file, active: file.id === id })),
+		)
+		inputRef.current?.focus();
 	}
 
 	const handleUpdateFileName =
@@ -57,6 +65,7 @@ export function App() {
 			<Sidebar 
         files={files}
         onAddFile={handleAddFile}
+        onSelectFile={handleSelectFile}
       />
 			<Content
 				file={getActiveFile(files)}

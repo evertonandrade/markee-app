@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react'
 import * as S from 'sidebar/sidebar-styles'
 import { Logo } from 'ui/logo'
 import { Button } from 'ui/button'
@@ -9,9 +10,10 @@ import { File } from 'resources/types/files'
 type SidebarProps = {
   files: File[]
   onAddFile: () => void
+  onSelectFile: (id: string) => (event: MouseEvent) => void
 }
 
-export function Sidebar({ files, onAddFile }: SidebarProps) {
+export function Sidebar({ files, onAddFile, onSelectFile }: SidebarProps) {
 	return (
 		<S.Wrapper>
 			<Logo />
@@ -22,6 +24,7 @@ export function Sidebar({ files, onAddFile }: SidebarProps) {
 			</Button>
 			<Explorer 
         files={files}
+        onSelectFile={onSelectFile}
       />
 		</S.Wrapper>
 	)
