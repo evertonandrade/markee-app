@@ -11,9 +11,10 @@ type SidebarProps = {
   files: File[]
   onAddFile: () => void
   onSelectFile: (id: string) => (event: MouseEvent) => void
+  onRemoveFile: (id: string) => (event: MouseEvent) => void
 }
 
-export function Sidebar({ files, onAddFile, onSelectFile }: SidebarProps) {
+export function Sidebar({ files, onAddFile, onSelectFile, onRemoveFile }: SidebarProps) {
 	return (
 		<S.Wrapper>
 			<Logo />
@@ -25,6 +26,7 @@ export function Sidebar({ files, onAddFile, onSelectFile }: SidebarProps) {
 			<Explorer 
         files={files}
         onSelectFile={onSelectFile}
+        onRemoveFile={onRemoveFile}
       />
 		</S.Wrapper>
 	)

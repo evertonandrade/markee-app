@@ -7,9 +7,10 @@ import { File } from 'resources/types/files'
 type ExplorerProps = {
   files: File[]
   onSelectFile: (id: string) => (event: MouseEvent) => void
+  onRemoveFile: (id: string) => (event: MouseEvent) => void
 }
 
-export function Explorer ({ files, onSelectFile }: ExplorerProps) {
+export function Explorer ({ files, onSelectFile, onRemoveFile }: ExplorerProps) {
   return (
     <S.ContainerExplorer>
       <S.List>
@@ -18,6 +19,7 @@ export function Explorer ({ files, onSelectFile }: ExplorerProps) {
             key={file.id}
             file={file}
             onSelectFile={onSelectFile}
+            onRemoveFile={onRemoveFile}
           />
         ))}
       </S.List>

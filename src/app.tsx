@@ -25,12 +25,17 @@ export function App() {
 	}
 
   const handleSelectFile = (id: string) => (event: MouseEvent) => {
-		event.preventDefault();
+		event.preventDefault()
 		setFiles((files) =>
 			files.map((file) => ({ ...file, active: file.id === id })),
 		)
-		inputRef.current?.focus();
+		inputRef.current?.focus()
 	}
+
+  const handleRemoveFile = (id: string) => (event: MouseEvent) => {
+		event.preventDefault()
+    setFiles(files => files.filter(file => file.id !== id))
+  }
 
 	const handleUpdateFileName =
 		(id: string) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +71,7 @@ export function App() {
         files={files}
         onAddFile={handleAddFile}
         onSelectFile={handleSelectFile}
+        onRemoveFile={handleRemoveFile}
       />
 			<Content
 				file={getActiveFile(files)}
