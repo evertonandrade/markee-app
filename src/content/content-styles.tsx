@@ -73,3 +73,14 @@ export const MarkdownPreview = styled.output`
     font-size: ${theme.sizes.medium};
   `}
 `
+
+export const EmptyState = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: ${theme.sizes.xxlarge};
+    color: ${theme.colors.gray};
+  `}
+`
