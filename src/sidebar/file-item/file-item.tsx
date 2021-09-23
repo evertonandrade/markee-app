@@ -1,20 +1,20 @@
+import { File } from 'resources/types/files'
 import { FileIcon, CloseIcon } from 'ui/icons'
 import * as S from './file-item-styles'
 
-type FileProps = {
-	name: string
-	active: boolean
-	status: 'editing' | 'saving' | 'saved'
+type FileItemProps = {
+  file: File
 }
 
-export function FileItem({ name, active, status }: FileProps) {
+export function FileItem({ file }: FileItemProps) {
+
 	return (
-		<S.ListItem active={active}>
+		<S.ListItem active={file.active}>
 			<S.Link>
 				<FileIcon />
-				{name}
+				{file.name}
 			</S.Link>
-			{active && <S.StatusIcon status={status} /> }
+			{file.active && <S.StatusIcon status={file.status} /> }
 			<S.CloseButton>
 				<CloseIcon />
 			</S.CloseButton>
