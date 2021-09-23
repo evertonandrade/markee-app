@@ -37,7 +37,7 @@ export function App() {
 			setFiles((files) =>
 				files.map((file) => {
 					if (file.id === id) {
-						return { ...file, name: event.target.value }
+						return { ...file, name: event.target.value, status: 'editing' }
 					}
 					return file
 				}),
@@ -49,7 +49,7 @@ export function App() {
 			setFiles((files) =>
 				files.map((file) => {
 					if (file.id === id) {
-						return { ...file, content: event.target.value }
+						return { ...file, content: event.target.value, status: 'editing' }
 					}
 					return file
 				}),
