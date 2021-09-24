@@ -1,21 +1,23 @@
+import { MouseEvent } from 'react'
+import { File } from 'resources/types/files'
 import { FileIcon, CloseIcon } from 'ui/icons'
 import * as S from './file-item-styles'
 
-type FileProps = {
-	name: string
-	active: boolean
-	status: 'editing' | 'saving' | 'saved'
+type FileItemProps = {
+	file: File
+	onSelectFile: (id: string) => (event: MouseEvent) => void
+  onRemoveFile: (id: string) => (event: MouseEvent) => void
 }
 
-export function FileItem({ name, active, status }: FileProps) {
+export function FileItem({ file, onSelectFile, onRemoveFile }: FileItemProps) {
 	return (
-		<S.ListItem active={active}>
+		<S.ListItem active={file.active} onClick={onSelectFile(file.id)}>
 			<S.Link>
 				<FileIcon />
-				{name}
+				{file.name}
 			</S.Link>
-			{active && <S.StatusIcon status={status} /> }
-			<S.CloseButton>
+			{file.active && <S.StatusIcon status={file.status} />}
+			<S.CloseButton onClick={onRemoveFile(file.id)}>
 				<CloseIcon />
 			</S.CloseButton>
 		</S.ListItem>

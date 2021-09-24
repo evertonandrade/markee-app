@@ -1,6 +1,7 @@
-import { ChangeEvent, useState } from 'react'
-import { FileIcon } from 'ui/icons'
+import { ChangeEvent, RefObject } from 'react'
+import { File } from 'resources/types/files'
 import * as S from './content-styles'
+import { FileIcon } from 'ui/icons'
 import marked from 'marked'
 import 'highlight.js/styles/vs.css'
 
@@ -16,13 +17,18 @@ import('highlight.js').then(hljs => {
   })
 })
 
-export function Content() {
-  const [content, setContent] = useState('');
+type ContentProps = {
+  file?: File
+  titleRef: RefObject<HTMLInputElement>
+  onUpdateFileName: (id: string) => (event: ChangeEvent<HTMLInputElement>) => void
+  onUpdateFileContent: (id: string) => (event: ChangeEvent<HTMLTextAreaElement>) => void
+}
 
-  const handleContent = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.target.value)
-  }
-
+export function Content({ titleRef, file, onUpdateFileName, onUpdateFileContent }: ContentProps) {
+  if (!file) return (
+    <S.EmptyState>Adicione um arquivo</S.EmptyState>
+  )
+  
 	return (
 		<S.Wrapper>
 			<S.Header>
@@ -30,17 +36,23 @@ export function Content() {
 					<S.Label htmlFor="fileName">
 						<FileIcon />
 					</S.Label>
-					<S.InputFile id="fileName" defaultValue="Sem Título" />
+					<S.InputFile 
+            id="fileName" 
+            ref={titleRef} 
+            value={file.name}
+            onChange={onUpdateFileName(file.id)}
+            autoFocus
+          />
 				</S.InputGroup>
 			</S.Header>
 			<S.MainContainer>
 				<S.MarkdownEditor 
           placeholder="Digite aqui seu markdown"
-          value={content}
-          onChange={handleContent}
+          value={file.content}
+          onChange={onUpdateFileContent(file.id)}
         />
 				<S.Separator />
-				<S.MarkdownPreview dangerouslySetInnerHTML={{ __html: marked(content) }} />
+				<S.MarkdownPreview dangerouslySetInnerHTML={{ __html: marked(file.content) }} />
 			</S.MainContainer>
 		</S.Wrapper>
 	)
