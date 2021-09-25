@@ -46,6 +46,12 @@ export function useFiles () {
     return () => clearTimeout(timer)
   }, [files])
 
+  useEffect(() => {
+    const fileActive = getActiveFile(files)
+    if (fileActive) window.history.replaceState(null, '', `/file/${fileActive.id}`)
+    else window.history.replaceState(null, '', `/file`)
+  }, [files])
+
 	const handleAddFile = () => {
 		const newFile: File = {
 			id: uuidv4(),
