@@ -1,10 +1,23 @@
 import { useState, useEffect, useRef, ChangeEvent, MouseEvent } from 'react'
+import localforage from 'localforage'
 import { v4 as uuidv4 } from 'uuid'
 import { File } from 'resources/types/files'
 
 export function useFiles () {
   const [files, setFiles] = useState<File[]>([])
 	const inputRef = useRef<HTMLInputElement>(null)
+
+	useEffect(() => {
+		(async () => {
+			const files = await localforage.getItem<File[]>('markee-app')
+			if (!files) handleAddFile()
+			else setFiles(files)
+		})()
+	}, [])
+
+	useEffect(() => {
+		localforage.setItem<File[]>('markee-app', files)
+	}, [files])
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>
